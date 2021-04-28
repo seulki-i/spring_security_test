@@ -1,0 +1,19 @@
+security:
+  username-parameter: loginId
+  password-parameter: userPassword
+  login-page: /login
+  login-processing-url: /login-process
+  default-success-url: /
+  login-failure-url: /login
+  logout-success-url: /login
+  ignore-patterns: >
+    /js/**,
+    /css/**,
+    /img/**
+  permit-all-patterns: >
+    /api/test/**,
+    /password-change,
+    /password-find,
+    /notification/**,
+    /js/**,
+    /src/**

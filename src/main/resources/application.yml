@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/test_dev?serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
+    initialization-mode: never
+  jpa:
+    hibernate:
+#      ddl-auto: update
+    show-sql: true # 실행 되는 SQL 문을 보여 줄지 설정
+  thymeleaf:
+    cache: false
+    mode: HTML
+server:
+  port: 19050
+  compression:
+    mime-types: text/html,text/css,application/json
+mybatis:
+  mapper-locations: /mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
