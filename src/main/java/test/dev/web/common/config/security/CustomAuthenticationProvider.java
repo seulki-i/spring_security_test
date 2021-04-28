@@ -34,10 +34,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         // AuthenticaionFilter에서 생성된 토큰으로부터 아이디와 비밀번호를 조회함
         String userId = token.getName();
         String password = (String) token.getCredentials();
+        String encodePassword = this.passwordEncoder.encode(password); //입력받은 pw sha256
         //DB에서 아이디로 사용자 조회
         UserDTO userDTO = userService.loadUserByUsername(userId);
 
-        if (!passwordEncoder.matches(password, passwordEncoder.encode(userDTO.getPassword()))) {
+        if (!passwordEncoder.matches(encodePassword, passwordEncoder.encode(userDTO.getPassword()))) {
             throw new BadCredentialsException(userDTO.getUsername() + " 패스워드가 일치하지 않습니다.");
         }
 
