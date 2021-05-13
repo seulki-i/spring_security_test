@@ -59,14 +59,14 @@ public class CustomSecurityConfigurerAdapter extends WebSecurityConfigurerAdapte
     public CustomAuthenticationFilter customAuthenticationFilter() throws Exception {
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
         customAuthenticationFilter.setFilterProcessesUrl("/login-process"); //로그인 처리 로직
-        customAuthenticationFilter.setAuthenticationSuccessHandler(customAuthenticationSuccessHandleru()); //로그인 성공 처리로직
+        customAuthenticationFilter.setAuthenticationSuccessHandler(customAuthenticationSuccessHandler()); //로그인 성공 처리로직
         customAuthenticationFilter.setAuthenticationFailureHandler(customAuthenticationFailureHandler()); //로그인 실패 처리로직
         customAuthenticationFilter.afterPropertiesSet();
         return customAuthenticationFilter;
     }
 
     @Bean
-    public CustomAuthenticationSuccessHandler customAuthenticationSuccessHandleru() {
+    public CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler() {
         return new CustomAuthenticationSuccessHandler();
     }
 
