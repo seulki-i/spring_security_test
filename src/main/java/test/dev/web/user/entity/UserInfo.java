@@ -1,10 +1,10 @@
 package test.dev.web.user.entity;
 
 import lombok.*;
-import test.dev.web.user.dto.UserRole;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author skkim
@@ -16,7 +16,6 @@ import java.io.Serializable;
 @Table(name = "user_info")
 @Getter @Setter
 public class UserInfo implements Serializable {
-
     @Id
     @Column(name = "user_id")
     private String userId;
@@ -30,9 +29,12 @@ public class UserInfo implements Serializable {
     @Column(name = "department_name")
     private String departmentName;
 
-    @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    private UserRole role; //권한여부
+//    @Column(name = "role")
+//    @Enumerated(EnumType.STRING)
+//    private UserRole role; //권한여부
+
+    @OneToMany(mappedBy = "userRoleKey.userInfo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<UserRole> roles; //권한여부
 
     @Column(name = "is_enable")
     private Boolean isEnable; // 사용 여부

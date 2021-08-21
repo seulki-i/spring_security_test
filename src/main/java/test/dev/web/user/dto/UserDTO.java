@@ -5,11 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Delegate;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import test.dev.web.user.entity.UserInfo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author skkim
@@ -27,7 +30,17 @@ public class UserDTO implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+//        return authorities;
+        List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
+
+        userInfo.getRoles().forEach(role -> simpleGrantedAuthorities.add(new SimpleGrantedAuthority(role.getUserRoleKey().getRole().getRoleCode())));
+
+        return simpleGrantedAuthorities;
+    }
+
+    public UserDTO(UserInfo userInfo) {
+        this.userInfo = userInfo;
+        this.authorities = getAuthorities();
     }
 
     @Override

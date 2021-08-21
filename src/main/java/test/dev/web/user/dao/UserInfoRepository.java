@@ -10,6 +10,5 @@ import java.util.Optional;
  * @since 2021-04-21
  */
 public interface UserInfoRepository extends JpaRepository<UserInfo, String> {
-
     Optional<UserInfo> findByUserId(String userId);
 }
